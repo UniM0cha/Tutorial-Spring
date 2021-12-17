@@ -15,4 +15,4 @@ spring:
     
 logging:
   level:
-    org.hibernate.SQL: debug
+    org.hibernate.SQL: debug  # hibernate가 생성하는 SQL문 보여줌
