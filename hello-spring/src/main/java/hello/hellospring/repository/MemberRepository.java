@@ -1,12 +1,14 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
-    void save(Member member);
+    Member save(Member member);
 
     Optional<Member> findById(Long id);
 

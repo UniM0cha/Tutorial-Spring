@@ -1,0 +1,21 @@
+2021-12-20 17:10:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:26:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:26:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:30:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:30:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:31:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
+2021-12-20 17:31:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+select member0_.id as id1_0_, member0_.name as name2_0_ from member member0_ where member0_.name=? [42102-200]
