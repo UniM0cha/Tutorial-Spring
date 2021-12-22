@@ -1,23 +1,20 @@
 package com.solstice.makeblog;
 
+import com.solstice.makeblog.board.repository.Board;
+import com.solstice.makeblog.board.repository.BoardRepository;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
+import java.util.List;
 
 public class MysqlConnectionTest {
 
-    private static final Logger log = LoggerFactory.getLogger(MysqlConnectionTest.class);
-    private DataSource ds;
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Test
     public void 데이터베이스_연결() {
-        try (Connection conn = ds.getConnection()) {
-            log.info("\n MySQL 연결 : " + conn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<Board> all = boardRepository.findAll();
+        System.out.println("all = " + all);
     }
 }

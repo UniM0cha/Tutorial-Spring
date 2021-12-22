@@ -1,1 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jpashop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
+  jpa:
+    hibernate:
+      # 자동으로 테이블 만들어줌
+      ddl-auto: create
+    properties:
+      hibernate:
+        # 하이버네이트가 시스템 아웃을 통해서 나옴
+#        show-sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
