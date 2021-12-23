@@ -17,8 +17,8 @@ class MemberRepositoryTest {
 
     @Test
     @Transactional
-//    @Rollback(value = false)
-    public void testMember() throws Exception {
+    @Rollback(value = false)
+    public void testMember() throws Exception{
         // given
         Member member = new Member();
         member.setUsername("memberA");
@@ -31,5 +31,6 @@ class MemberRepositoryTest {
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
         Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
         Assertions.assertThat(findMember).isEqualTo(member);
+        // JPA 동일성 보장
     }
 }
