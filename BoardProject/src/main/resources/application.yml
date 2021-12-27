@@ -1,0 +1,20 @@
+# ?? ?? ??
+server:
+  port: 18080
+
+# DB ?? (hikari CP ?? ?????)
+spring:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/hr?
+      username: hr
+      password: spring
+      connection-timeout: 10000
+      validation-timeout: 10000
+      connection-test-query: select 1 from dual
+
+# ?? ??? - ???? ??? ?? ??
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
