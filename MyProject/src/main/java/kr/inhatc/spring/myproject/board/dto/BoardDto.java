@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 // DTO : Data Transfer Object : 데이터 전달 객체 (= DB 컬럼)
 @Data
@@ -18,4 +19,7 @@ public class BoardDto {
     private int hitCnt;
     private String creatorId;
     private String createDatetime;
+
+    // 파일 관리를 위한 리스트 추가
+    private List<FileDto> fileList;
 }

@@ -51,4 +51,33 @@
         SET delete_yn = 'Y'
         WHERE board_idx = #{boardIdx};
     </update>
+
+    <!--  리스트를 전달해줘도 파라미터에는 그 리스트의 원소만 잡아주면 된다.  -->
+    <insert id="boardFileInsert" parameterType="kr.inhatc.spring.myproject.board.dto.FileDto">
+        INSERT INTO T_FILE(
+           board_idx,
+           original_file_name,
+           stored_file_path,
+           file_size,
+           creator_id,
+           create_datetime
+        )
+        SELECT A.* FROM(
+        <foreach collection="list" item="item" separator="UNION ALL">
+            SELECT #{item.boardIdx} as board_idx,
+                   #{item.originalFileName} as original_file_name,
+                   #{item.storedFilePath} as stored_file_path,
+                   #{item.fileSize} as file_size,
+                   'admin' as creator_id,
+                   SYSDATE() as create_datetime
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+
+    <select id="selectBoardFileList" parameterType="int" resultType="kr.inhatc.spring.myproject.board.dto.FileDto">
+        SELECT idx, board_idx, original_file_name, ROUND(file_size/1024) as file_size
+        FROM t_file
+        WHERE board_idx = #{boardIdx};
+    </select>
 </mapper>

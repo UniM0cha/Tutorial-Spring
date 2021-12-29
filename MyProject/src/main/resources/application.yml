@@ -7,7 +7,8 @@ spring:
   datasource:
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/hr?
+#      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/hr?
+      jdbc-url: jdbc:log4jdbc:mysql://10.200.12.77:3306/hr?
       username: hr
       password: spring
       connection-timeout: 10000
