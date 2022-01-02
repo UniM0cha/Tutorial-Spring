@@ -49,9 +49,8 @@
     <div class="file_list">
         <a th:each="file : ${board.fileList}"
            th:text="|${file.originalFileName}(${file.fileSize}kb)|"
-           th:href="/board/downloadBoardFile"
-        >
-        </a>
+           th:href="@{/board/downloadBoardFile(idx=${file.idx}, boardIdx=${file.boardIdx})}"
+        ></a>
     </div>
 
     <input type="button" id="list" value="목록으로" class="btn">

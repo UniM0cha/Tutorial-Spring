@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.inhatc.spring.myproject.board.mapper.BoardMapper">
     <select id="boardList" resultType="kr.inhatc.spring.myproject.board.dto.BoardDto">
@@ -12,12 +10,12 @@
     </select>
 
     <insert id="boardInsert" parameterType="kr.inhatc.spring.myproject.board.dto.BoardDto">
-        # 시퀀스 값 가져오기
-<!--        <selectKey keyProperty="boardIdx" resultType="int" order="BEFORE">-->
-<!--            SELECT board_seq.nextval FROM dual-->
-<!--        </selectKey>-->
         INSERT INTO T_BOARD(title, contents, create_datetime, creator_id)
         VALUES (#{title}, #{contents}, sysdate(), 'admin')
+        <!-- pk 값 가져오기 -->
+        <selectKey keyProperty="boardIdx" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <select id="boardDetail" parameterType="int" resultType="kr.inhatc.spring.myproject.board.dto.BoardDto">
@@ -41,10 +39,10 @@
         WHERE board_idx = #{boardIdx};
     </update>
 
-<!--    <delete id="boardDelete" parameterType="int">-->
-<!--        DELETE FROM T_BOARD-->
-<!--        WHERE board_idx = #{boardIdx};-->
-<!--    </delete>-->
+    <!--    <delete id="boardDelete" parameterType="int">-->
+    <!--        DELETE FROM T_BOARD-->
+    <!--        WHERE board_idx = #{boardIdx};-->
+    <!--    </delete>-->
 
     <update id="boardDelete" parameterType="int">
         UPDATE T_BOARD
@@ -78,6 +76,13 @@
     <select id="selectBoardFileList" parameterType="int" resultType="kr.inhatc.spring.myproject.board.dto.FileDto">
         SELECT idx, board_idx, original_file_name, ROUND(file_size/1024) as file_size
         FROM t_file
-        WHERE board_idx = #{boardIdx};
+        WHERE board_idx = #{boardIdx} AND deleted_yn = 'N';
     </select>
+
+    <select id="selectFileInfo" parameterType="map" resultType="kr.inhatc.spring.myproject.board.dto.FileDto">
+        SELECT original_file_name, stored_file_path, file_size
+        FROM t_file
+        WHERE idx = #{idx} AND board_idx=#{boardIdx} AND deleted_yn = 'N';
+    </select>
+
 </mapper>

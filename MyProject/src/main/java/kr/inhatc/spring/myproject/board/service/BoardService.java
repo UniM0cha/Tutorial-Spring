@@ -1,6 +1,8 @@
 package kr.inhatc.spring.myproject.board.service;
 
 import kr.inhatc.spring.myproject.board.dto.BoardDto;
+import kr.inhatc.spring.myproject.board.dto.FileDto;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
@@ -15,4 +17,6 @@ public interface BoardService {
     void boardUpdate(BoardDto board);
 
     void boardDelete(int boardIdx);
+
+    FileDto selectFileInfo(int idx, int boardIdx);
 }

@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
     @Autowired
     private BoardMapper boardMapper;
@@ -33,20 +33,23 @@ public class BoardServiceImpl implements BoardService{
     public void boardInsert(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) {
         boardMapper.boardInsert(board);
 
-//        // 임시
-//        if(!ObjectUtils.isEmpty(multipartHttpServletRequest)) {
-//            Iterator<String> iter = multipartHttpServletRequest.getFileNames();
-//
-//            while (iter.hasNext()) {
-//                String name = iter.next();
-//                List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
-//                for (MultipartFile multipartFile : list) {
-//                    System.out.println("=====================>file name = " + multipartFile.getOriginalFilename());
-//                    System.out.println("=====================>file size = " + multipartFile.getSize());
-//                    System.out.println("=====================>file type = " + multipartFile.getContentType());
-//                }
-//            }
-//        }
+        // // 임시
+        // if(!ObjectUtils.isEmpty(multipartHttpServletRequest)) {
+        // Iterator<String> iter = multipartHttpServletRequest.getFileNames();
+        //
+        // while (iter.hasNext()) {
+        // String name = iter.next();
+        // List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
+        // for (MultipartFile multipartFile : list) {
+        // System.out.println("=====================>file name = " +
+        // multipartFile.getOriginalFilename());
+        // System.out.println("=====================>file size = " +
+        // multipartFile.getSize());
+        // System.out.println("=====================>file type = " +
+        // multipartFile.getContentType());
+        // }
+        // }
+        // }
 
         // 1. 파일 저장
         List<FileDto> list = fileUtils.parseFileInfo(board.getBoardIdx(), multipartHttpServletRequest);
@@ -56,7 +59,6 @@ public class BoardServiceImpl implements BoardService{
         if (!CollectionUtils.isEmpty(list)) {
             boardMapper.boardFileInsert(list);
         }
-
 
     }
 
@@ -81,5 +83,11 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void boardDelete(int boardIdx) {
         boardMapper.boardDelete(boardIdx);
+    }
+
+    @Override
+    public FileDto selectFileInfo(int idx, int boardIdx) {
+        FileDto boardFile = boardMapper.selectFileInfo(idx, boardIdx);
+        return boardFile;
     }
 }

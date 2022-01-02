@@ -3,6 +3,7 @@ package kr.inhatc.spring.myproject.board.mapper;
 import kr.inhatc.spring.myproject.board.dto.BoardDto;
 import kr.inhatc.spring.myproject.board.dto.FileDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface BoardMapper {
     List<FileDto> selectBoardFileList(int boardIdx);
 
     void boardFileInsert(List<FileDto> list);
+
+    FileDto selectFileInfo(@Param("idx") int idx, @Param("boardIdx") int boardIdx);
 }

@@ -19,8 +19,8 @@ public class FileUtils {
 
     // TODO : images 폴더 안에 오늘 날짜 폴더 안에 현재 나노타임으로 파일명 지정
     public List<FileDto> parseFileInfo(int boardIdx, MultipartHttpServletRequest multipartHttpServletRequest) {
-        
-        if(ObjectUtils.isEmpty(multipartHttpServletRequest)) {
+
+        if (ObjectUtils.isEmpty(multipartHttpServletRequest)) {
             return null;
         }
 
