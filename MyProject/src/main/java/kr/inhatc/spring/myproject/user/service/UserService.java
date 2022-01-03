@@ -4,8 +4,14 @@ import java.util.List;
 
 import kr.inhatc.spring.myproject.user.entity.Users;
 
-public interface UserSerivce {
+public interface UserService {
 
   List<Users> userList();
+
+  void saveUsers(Users user);
+
+  Users userDetail(String id);
+
+  void deleteUsers(String id);
 
 }

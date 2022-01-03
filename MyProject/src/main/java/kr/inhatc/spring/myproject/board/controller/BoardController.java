@@ -3,7 +3,6 @@ package kr.inhatc.spring.myproject.board.controller;
 import kr.inhatc.spring.myproject.board.dto.BoardDto;
 import kr.inhatc.spring.myproject.board.dto.FileDto;
 import kr.inhatc.spring.myproject.board.service.BoardService;
-import kr.inhatc.spring.myproject.board.service.BoardServiceImpl;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
