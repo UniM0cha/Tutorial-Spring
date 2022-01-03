@@ -37,10 +37,10 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping("/")
-    public String hello() {
-        return "index";
-    }
+    // @RequestMapping("/")
+    // public String hello() {
+    // return "index";
+    // }
 
     // @RequestMapping("/board/boardList.do")
     // 잘 안쓰이지만 이런 것도 있다.

@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -46,8 +48,7 @@ public class DataBaseConfiguration {
 
         // 매퍼의 위치 넣어줌
         sqlSessionFactoryBean.setMapperLocations(
-                applicationContext.getResources("classpath:mapper/**/sql-*.xml")
-        );
+                applicationContext.getResources("classpath:mapper/**/sql-*.xml"));
 
         // Mybatis 자체 설정
         sqlSessionFactoryBean.setConfiguration(mybatisConfig());
@@ -66,5 +67,18 @@ public class DataBaseConfiguration {
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    /**
+     * 1. 개요 : JPA 설정
+     * 2. 처리내용 : JPA 설정 빈 등록
+     * 
+     * @Method Name : hibernateConfig
+     * @return
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "spring.jpa")
+    public Properties hibernateConfig() {
+        return new Properties();
     }
 }
