@@ -24,7 +24,7 @@ public class UserController {
   @RequestMapping("/")
   public String hello() {
 
-    return "index";
+    return "redirect:/user/userList";
   }
 
   // RESTFUL!!!

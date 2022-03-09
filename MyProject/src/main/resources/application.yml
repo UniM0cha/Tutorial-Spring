@@ -16,6 +16,7 @@ spring:
       connection-timeout: 10000
       validation-timeout: 10000
       connection-test-query: select 1 from dual
+
   # JPA 설정
   jpa:
     hibernate:
@@ -48,6 +49,7 @@ spring:
     resources:
       cache:
         period: 0
+  # devtools를 설치하면 자동으로 설정되기는 한다.
 
 logging:
   level:
