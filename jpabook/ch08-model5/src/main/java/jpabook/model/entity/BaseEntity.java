@@ -9,10 +9,10 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseEntity {
 
-    private Date createdDate;       //등록일
-    private Date lastModifiedDate;  //수정일
+    private Date createdDate; // 등록일
+    private Date lastModifiedDate; // 수정일
 
-    //Getter, Setter
+    // Getter, Setter
     public Date getCreatedDate() {
         return createdDate;
     }

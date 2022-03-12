@@ -1,6 +1,5 @@
 package jpabook.model;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
+
+import jpabook.model.entity.Member;
 
 /**
  * Created by 1001218 on 15. 4. 5..
@@ -28,10 +29,10 @@ public class Main {
 
             tx.begin(); // 트랜잭션 시작
             // TODO 비즈니스 로직
-            String jpql = "select m from Member as m where m.name = 'kim'";
+            String jpql = "select m from Member as m";
             List<Member> resultList = em.createQuery(jpql, Member.class).getResultList();
             for (Member member : resultList) {
-                System.out.println(member);
+                System.out.println(member.toString());
             }
 
             tx.commit();// 트랜잭션 커밋

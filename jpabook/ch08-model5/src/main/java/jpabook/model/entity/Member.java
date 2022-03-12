@@ -58,4 +58,13 @@ public class Member extends BaseEntity {
         this.orders = orders;
     }
 
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", address='" + getAddress() + "'" +
+                ", orders='" + getOrders() + "'" +
+                "}";
+    }
+
 }
