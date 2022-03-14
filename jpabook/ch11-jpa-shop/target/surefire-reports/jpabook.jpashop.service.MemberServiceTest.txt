@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: jpabook.jpashop.service.MemberServiceTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 sec
+=======
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.963 sec
+>>>>>>> d7c67bc5c86fd8327c1a5aad90a664622d14fb49
