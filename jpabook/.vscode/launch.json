@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-JpabookplusApplication<jpabookplus>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.example.jpabookplus.JpabookplusApplication",
+      "projectName": "jpabookplus",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
