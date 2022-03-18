@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.javajava.board.mapper.BoardMapper">
+    <select id="boardList" resultType="com.example.javajava.board.dto.BoardDto">
+        SELECT board_idx, title, hit_cnt, DATE_FORMAT(create_datetime, '%Y-%m-%d') AS create_datetime
+        FROM T_BOARD
+        WHERE delete_yn = 'N'
+        ORDER BY board_idx DESC
+    </select>
+
+    <insert id="boardInsert" parameterType="com.example.javajava.board.dto.BoardDto">
+        INSERT INTO T_BOARD(title, contents, create_datetime, creator_id)
+        VALUES (#{title}, #{contents}, sysdate(), 'admin')
+        <!-- pk 값 가져오기 -->
+        <selectKey keyProperty="boardIdx" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="boardDetail" parameterType="int" resultType="com.example.javajava.board.dto.BoardDto">
+        SELECT board_idx, title, contents, hit_cnt, DATE_FORMAT(create_datetime, '%Y-%m-%d') AS create_datetime, creator_id
+        FROM T_BOARD
+        WHERE delete_yn = 'N' AND board_idx = #{boardIdx}
+    </select>
+
+    <update id="boardUpdate" parameterType="com.example.javajava.board.dto.BoardDto">
+        UPDATE T_BOARD
+        SET title           = #{title},
+            contents        = #{contents},
+            create_datetime = SYSDATE(),
+            creator_id      = 'admin'
+        WHERE board_idx = #{boardIdx};
+    </update>
+
+    <update id="updateHit" parameterType="int">
+        UPDATE T_BOARD
+        SET hit_cnt = hit_cnt + 1
+        WHERE board_idx = #{boardIdx};
+    </update>
+
+    <!--    <delete id="boardDelete" parameterType="int">-->
+    <!--        DELETE FROM T_BOARD-->
+    <!--        WHERE board_idx = #{boardIdx};-->
+    <!--    </delete>-->
+
+    <update id="boardDelete" parameterType="int">
+        UPDATE T_BOARD
+        SET delete_yn = 'Y'
+        WHERE board_idx = #{boardIdx};
+    </update>
+
+    <!--  리스트를 전달해줘도 파라미터에는 그 리스트의 원소만 잡아주면 된다.  -->
+    <insert id="boardFileInsert" parameterType="com.example.javajava.board.dto.FileDto">
+        INSERT INTO T_FILE(
+           board_idx,
+           original_file_name,
+           stored_file_path,
+           file_size,
+           creator_id,
+           create_datetime
+        )
+        SELECT A.* FROM(
+        <foreach collection="list" item="item" separator="UNION ALL">
+            SELECT #{item.boardIdx} as board_idx,
+                   #{item.originalFileName} as original_file_name,
+                   #{item.storedFilePath} as stored_file_path,
+                   #{item.fileSize} as file_size,
+                   'admin' as creator_id,
+                   SYSDATE() as create_datetime
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+
+    <select id="selectBoardFileList" parameterType="int" resultType="com.example.javajava.board.dto.FileDto">
+        SELECT idx, board_idx, original_file_name, ROUND(file_size/1024) as file_size
+        FROM t_file
+        WHERE board_idx = #{boardIdx} AND deleted_yn = 'N';
+    </select>
+
+    <select id="selectFileInfo" parameterType="map" resultType="com.example.javajava.board.dto.FileDto">
+        SELECT original_file_name, stored_file_path, file_size
+        FROM t_file
+        WHERE idx = #{idx} AND board_idx=#{boardIdx} AND deleted_yn = 'N';
+    </select>
+
+</mapper>
