@@ -6,16 +6,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #  미러 서버 설정
 RUN sed -i 's@archive.ubuntu.com@ftp.harukasan.org@g' /etc/apt/sources.list &&\
-  RUN sed -i 's@ports.ubuntu.com@ftp.harukasan.org@g' /etc/apt/sources.list
+  sed -i 's@ports.ubuntu.com@ftp.harukasan.org@g' /etc/apt/sources.list
 
 # 필요한 패키지 설치
 RUN apt update &&\
-  RUN apt install -y nano openjdk-17-jdk git
+  apt install -y nano openjdk-17-jdk git
 
 # git 설정
 RUN git config --global user.name "UniM0cha" &&\
-  RUN git config --global user.email "solst_ice@naver.com" &&\
-  RUN git config --global credential.helper store
+  git config --global user.email "solst_ice@naver.com" &&\
+  git config --global credential.helper store
 
 # git clone
 WORKDIR /root/github/
