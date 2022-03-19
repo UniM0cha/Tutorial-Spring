@@ -1,6 +1,9 @@
 package com.example.javajava.user.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,22 @@ public class UserController {
   }
 
   @RequestMapping(value = "/user/userInsert", method = RequestMethod.GET)
-  public String userWrite() {
+  public String userWrite(Model model) {
+    List<String> enabledList = new ArrayList<>();
+    enabledList.add("가능");
+    enabledList.add("불가능");
+
+    List<String> authorityList = new ArrayList<>();
+    authorityList.add("ROLE_GUEST");
+    authorityList.add("ROLE_MEMBER");
+    authorityList.add("ROLE_ADMIN");
+
+    Map<String, List<String>> map = new HashMap<>();
+    map.put("enabledList", enabledList);
+    map.put("authorityList", authorityList);
+
+    model.addAttribute("map", map);
+
     return "/user/userWrite";
   }
 

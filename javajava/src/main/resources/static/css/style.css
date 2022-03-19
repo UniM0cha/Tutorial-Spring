@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+/* 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
@@ -159,4 +159,16 @@ caption {
 
 .file_list a {
     display: inherit !important;
+}
+*/
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  background: blue;
 }

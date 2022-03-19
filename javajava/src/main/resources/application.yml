@@ -16,9 +16,6 @@ spring:
 
   thymeleaf:
     cache: false
-    enabled: true
-    prefix: classpath:/templates/
-    suffix: .html
 
 mybatis:
   mapper-locations: mapper/**/*.xml
@@ -28,3 +25,4 @@ mybatis:
 logging:
   level:
     root: info
+    org.springframework.security: debug

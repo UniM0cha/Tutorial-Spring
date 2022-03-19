@@ -53,6 +53,11 @@ public class BoardController {
     // return mv;
     // }
 
+    @RequestMapping("/test/testPage")
+    public String testPage(Model model) {
+        return "/test/testPage";
+    }
+
     // RESTFUL 프로그래밍에서는 .do를 쓰지 않는다
     @RequestMapping("/board/boardList")
     public String boardList(Model model) {
