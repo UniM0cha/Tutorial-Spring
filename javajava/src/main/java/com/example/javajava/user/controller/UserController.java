@@ -22,8 +22,7 @@ public class UserController {
   private UserService userSerivce;
 
   @RequestMapping("/")
-  public String hello() {
-
+  public String home() {
     return "index";
   }
 
