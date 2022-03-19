@@ -22,9 +22,9 @@ public class UserController {
   private UserService userSerivce;
 
   @RequestMapping("/")
-  public String hello(Model model) {
+  public String hello() {
 
-    return "redirect:/user/userList";
+    return "index";
   }
 
   // RESTFUL!!!

@@ -58,7 +58,10 @@ public class BoardController {
     public String boardList(Model model) {
         // 서비스에서 리스트를 받아온 다음
         List<BoardDto> list = boardService.boardList();
-        log.debug("Access to boardList ==============> " + list.size());
+        log.info("Access to boardList ==============> " + list.size());
+        for (BoardDto boardDto : list) {
+            log.info(boardDto.toString());
+        }
         // System.out.println("list.size() = " + list.size());
 
         // list라는 이름으로 받아온 list를 보내준다.
