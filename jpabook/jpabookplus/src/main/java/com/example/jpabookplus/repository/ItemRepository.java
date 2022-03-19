@@ -1,6 +1,8 @@
 package com.example.jpabookplus.repository;
 
 import com.example.jpabookplus.domain.item.Item;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -12,25 +14,28 @@ import java.util.List;
  * Date: 2013. 12. 3. Time: 오후 9:48
  */
 
-@Repository
-public class ItemRepository {
+// @Repository
+// public class ItemRepository {
 
-    @PersistenceContext
-    EntityManager em;
+// @PersistenceContext
+// EntityManager em;
 
-    public void save(Item item) {
-        if (item.getId() == null) {
-            em.persist(item);
-        } else {
-            em.merge(item);
-        }
-    }
+// public void save(Item item) {
+// if (item.getId() == null) {
+// em.persist(item);
+// } else {
+// em.merge(item);
+// }
+// }
 
-    public Item findOne(Long id) {
-        return em.find(Item.class, id);
-    }
+// public Item findOne(Long id) {
+// return em.find(Item.class, id);
+// }
 
-    public List<Item> findAll() {
-        return em.createQuery("select i from Item i", Item.class).getResultList();
-    }
+// public List<Item> findAll() {
+// return em.createQuery("select i from Item i", Item.class).getResultList();
+// }
+// }
+
+public interface ItemRepository extends JpaRepository<Item, Long> {
 }
