@@ -11,8 +11,8 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
-        use_sql_comments: false
+        '[format_sql]': true
+        '[use_sql_comments]': false
 
   thymeleaf:
     cache: false
@@ -25,4 +25,4 @@ mybatis:
 logging:
   level:
     root: info
-    org.springframework.security: debug
+    '[org.springframework.security]': debug

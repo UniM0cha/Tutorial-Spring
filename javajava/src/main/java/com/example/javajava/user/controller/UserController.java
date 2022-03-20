@@ -8,6 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,9 @@ public class UserController {
 
   @Autowired
   private UserService userSerivce;
+
+  @Autowired
+  private PasswordEncoder encoder;
 
   @RequestMapping("/")
   public String home() {
@@ -62,7 +66,13 @@ public class UserController {
 
   @RequestMapping(value = "/user/userInsert", method = RequestMethod.POST)
   public String userInsert(Users user) {
-    userSerivce.saveUsers(user);
+    if (user != null) {
+      log.info("변경 전 : " + user.getPw());
+      String pw = encoder.encode(user.getPw());
+      log.info("변경 후 : " + pw);
+      user.setPw(pw);
+      userSerivce.saveUsers(user);
+    }
     return "redirect:/user/userList";
   }
 
