@@ -11,9 +11,12 @@ import com.example.javajava.user.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
+  private UserRepository userRepository;
 
   @Autowired
-  UserRepository userRepository;
+  public UserServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public List<Users> userList() {

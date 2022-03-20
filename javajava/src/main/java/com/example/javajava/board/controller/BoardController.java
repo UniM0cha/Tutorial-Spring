@@ -32,8 +32,12 @@ public class BoardController {
     // 원래는 이렇게 쓰는데
     // private BoardService boardService = new BoardServiceImpl();
     // Autowired를 붙히면 빈으로 둥록된 클래스를 불러온다.
-    @Autowired
     private BoardService boardService;
+
+    @Autowired
+    public BoardController(BoardService boardService) {
+        this.boardService = boardService;
+    }
 
     // @RequestMapping("/")
     // public String hello() {

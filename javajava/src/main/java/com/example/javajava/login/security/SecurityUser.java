@@ -1,10 +1,7 @@
 package com.example.javajava.login.security;
 
-import java.util.Collection;
-
 import com.example.javajava.user.entity.Users;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 

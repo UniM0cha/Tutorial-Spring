@@ -22,11 +22,14 @@ import com.example.javajava.user.service.UserService;
 public class UserController {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
-  @Autowired
   private UserService userSerivce;
+  private PasswordEncoder encoder;
 
   @Autowired
-  private PasswordEncoder encoder;
+  public UserController(UserService userSerivce, PasswordEncoder encoder) {
+    this.userSerivce = userSerivce;
+    this.encoder = encoder;
+  }
 
   @RequestMapping("/")
   public String home() {

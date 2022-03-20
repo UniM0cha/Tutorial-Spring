@@ -18,8 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SecurityUserDetailService implements UserDetailsService {
 
-  @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  public SecurityUserDetailService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

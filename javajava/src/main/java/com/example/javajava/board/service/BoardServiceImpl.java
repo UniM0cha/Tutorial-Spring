@@ -14,12 +14,14 @@ import java.util.List;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    @Autowired
     private BoardMapper boardMapper;
-    // 나중에 클래스 주입으로 바꿔보자
+    private FileUtils fileUtils;
 
     @Autowired
-    private FileUtils fileUtils;
+    public BoardServiceImpl(BoardMapper boardMapper, FileUtils fileUtils) {
+        this.boardMapper = boardMapper;
+        this.fileUtils = fileUtils;
+    }
 
     @Override
     public List<BoardDto> boardList() {
