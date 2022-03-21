@@ -1,9 +1,9 @@
 package com.example.javajava.board.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -12,18 +12,19 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Board {
+public class File {
   @Id
-  @Column(name = "board_idx")
+  @GeneratedValue
   private Long idx;
-  private String title;
-  private String contents;
-  private int hitCnt = 0;
+
+  private String originalFileName;
+  private String storedFilePath;
+  private Long fileSize;
+  private String creatorId;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date createDatetime;
 
-  private String creatorId;
-
   private char deleteYn = 'N';
+
 }
