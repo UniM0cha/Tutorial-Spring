@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.example.javajava.board.dto.BoardDto;
-import com.example.javajava.board.dto.FileDto;
 
 import org.hibernate.annotations.CreationTimestamp;
 

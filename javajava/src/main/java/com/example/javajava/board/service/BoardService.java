@@ -4,7 +4,6 @@ import com.example.javajava.board.dto.BoardDto;
 import com.example.javajava.board.dto.FileDto;
 
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
