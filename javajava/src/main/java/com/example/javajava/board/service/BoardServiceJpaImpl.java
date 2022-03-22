@@ -55,20 +55,15 @@ public class BoardServiceJpaImpl implements BoardService {
   }
 
   @Override
-  public void boardInsert(BoardDto boardDto, MultipartFile[] files) {
+  public void boardInsert(BoardDto boardDto, List<MultipartFile> files) {
     for (MultipartFile file : files) {
       if (!file.isEmpty()) {
         log.info("파일 정보: " + file.getOriginalFilename() + " / " + file.getContentType());
       }
     }
-    Board board = new Board();
-    board.boardDtoToBoard(boardDto);
-    Board savedBoard = boardRepository.save(board);
-    log.info("================> savedBoard: " + savedBoard.toString());
 
     // // 1. 파일 저장
-    List<FileDto> fileDtos = fileUtils.parseFileInfo(savedBoard.getIdx(),
-        files);
+    List<FileDto> fileDtos = fileUtils.parseFileInfo2(files);
 
     // // 2. DB 저장
     // // list에 저장된 내용물이 있다면
@@ -83,6 +78,10 @@ public class BoardServiceJpaImpl implements BoardService {
     // fileRepository.saveAll(files);
     // }
 
+    Board board = new Board();
+    board.boardDtoToBoard(boardDto);
+    Board savedBoard = boardRepository.save(board);
+    log.info("================> savedBoard: " + savedBoard.toString());
   }
 
   @Override

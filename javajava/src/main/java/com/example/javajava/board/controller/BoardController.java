@@ -91,7 +91,7 @@ public class BoardController {
   // model 은 컨트롤러에서 뷰로 넘겨줄 때 쓰는 것이므로 필요 없다.
   // BoardDto를 정의해놓으면 form을 통해서 받은 내용을 board에 자동으로 삽입하게 된다.
   // 파일 삽입한 것을 받아오기 위해 Multipart--- 어쩌구를 넣어준다.
-  public String boardInsert(BoardDto boardDto, MultipartFile[] files) {
+  public String boardInsert(BoardDto boardDto, List<MultipartFile> files) {
     boardService.boardInsert(boardDto, files);
     return "redirect:/";
   }

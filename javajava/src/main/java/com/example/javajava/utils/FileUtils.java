@@ -17,7 +17,20 @@ import java.util.List;
 @Component
 public class FileUtils {
 
-  public List<FileDto> parseFileInfo(Long boardIdx, MultipartFile[] files) {
+  public List<FileDto> parseFileInfo2(List<MultipartFile> files) {
+    if (files.isEmpty()) {
+      return null;
+    }
+
+    List<FileDto> fileDtos = new ArrayList<>();
+    for (MultipartFile file : files) {
+
+    }
+
+    return new ArrayList<>();
+  }
+
+  public List<FileDto> parseFileInfo(Long boardIdx, MultipartHttpServletRequest files) {
 
     if (ObjectUtils.isEmpty(files)) {
       return null;

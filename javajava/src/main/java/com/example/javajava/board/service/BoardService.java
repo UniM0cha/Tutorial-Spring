@@ -11,7 +11,7 @@ import java.util.List;
 public interface BoardService {
     List<BoardDto> boardList();
 
-    void boardInsert(BoardDto board, MultipartFile[] files);
+    void boardInsert(BoardDto board, List<MultipartFile> files);
 
     BoardDto boardDetail(Long boardIdx);
 
