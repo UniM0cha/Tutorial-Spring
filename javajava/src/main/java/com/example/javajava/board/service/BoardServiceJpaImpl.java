@@ -12,12 +12,14 @@ import com.example.javajava.utils.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,33 +57,23 @@ public class BoardServiceJpaImpl implements BoardService {
   }
 
   @Override
-  public void boardInsert(BoardDto boardDto, List<MultipartFile> files) {
-    for (MultipartFile file : files) {
-      if (!file.isEmpty()) {
-        log.info("파일 정보: " + file.getOriginalFilename() + " / " + file.getContentType());
-      }
-    }
-
-    // // 1. 파일 저장
-    List<FileDto> fileDtos = fileUtils.parseFileInfo2(files);
-
-    // // 2. DB 저장
-    // // list에 저장된 내용물이 있다면
-    // if (!CollectionUtils.isEmpty(fileDtos)) {
-    // List<File> files = fileDtos.stream()
-    // .map((fileDto) -> modelMapper.map(fileDto, File.class))
-    // .collect(Collectors.toList());
-
-    // for (File file : files) {
-    // log.info("저장할 files: " + file);
-    // }
-    // fileRepository.saveAll(files);
-    // }
+  public void boardInsert(BoardDto boardDto, List<MultipartFile> multiFiles) {
 
     Board board = new Board();
     board.boardDtoToBoard(boardDto);
     Board savedBoard = boardRepository.save(board);
-    log.info("================> savedBoard: " + savedBoard.toString());
+
+    // 1. 파일 저장
+    List<FileDto> fileDtos = fileUtils.parseFileInfo2(multiFiles);
+
+    // 2. DB 저장
+    for (FileDto fileDto : fileDtos) {
+      File file = new File();
+      file.fileDtoToFile(fileDto);
+      file.setBoard(savedBoard);
+      log.info("데이터베이스에 저장할 파일: " + file.toString());
+      fileRepository.save(file);
+    }
   }
 
   @Override

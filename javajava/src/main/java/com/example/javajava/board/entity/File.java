@@ -11,14 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.javajava.board.dto.FileDto;
+
 import lombok.Getter;
+import lombok.ToString;
 
 @Entity
 @Getter
+@ToString
 public class File {
   @Id
-  @Column(name = "file_idx")
   @GeneratedValue
+  @Column(name = "file_idx")
   private Long idx;
 
   private String originalFileName;
@@ -33,4 +37,14 @@ public class File {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Board board;
+
+  public void fileDtoToFile(FileDto fileDto) {
+    this.originalFileName = fileDto.getOriginalFileName();
+    this.storedFilePath = fileDto.getStoredFilePath();
+    this.fileSize = fileDto.getFileSize();
+  }
+
+  public void setBoard(Board board) {
+    this.board = board;
+  }
 }
