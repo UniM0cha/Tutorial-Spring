@@ -12,7 +12,6 @@ import com.example.javajava.utils.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -26,14 +25,20 @@ import java.util.stream.Collectors;
 public class BoardServiceJpaImpl implements BoardService {
 
   private BoardRepository boardRepository;
+  private BoardMapper boardMapper;
   private FileRepository fileRepository;
   private FileUtils fileUtils;
   private ModelMapper modelMapper;
 
   @Autowired
-  public BoardServiceJpaImpl(BoardRepository boardRepository, FileRepository fileRepository, FileUtils fileUtils,
+  public BoardServiceJpaImpl(
+      BoardRepository boardRepository,
+      BoardMapper boardMapper,
+      FileRepository fileRepository,
+      FileUtils fileUtils,
       ModelMapper modelMapper) {
     this.boardRepository = boardRepository;
+    this.boardMapper = boardMapper;
     this.fileRepository = fileRepository;
     this.fileUtils = fileUtils;
     this.modelMapper = modelMapper;
@@ -75,14 +80,12 @@ public class BoardServiceJpaImpl implements BoardService {
   @Override
   public BoardDto boardDetail(Long boardIdx) {
     Board board = boardRepository.findById(boardIdx).get();
-
-    // 파일정보
-    List<FileDto> fileList = boardMapper.selectBoardFileList(boardIdx);
-    board.setFileList(fileList);
+    log.info("불러온 board: " + board);
 
     // 조회수 증가
-    boardMapper.updateHit(boardIdx);
-    return board;
+    board.updateHitcnt();
+    BoardDto boardDto = modelMapper.map(board, BoardDto.class);
+    return boardDto;
   }
 
   @Override

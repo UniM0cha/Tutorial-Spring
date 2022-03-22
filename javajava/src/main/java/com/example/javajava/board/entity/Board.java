@@ -1,10 +1,13 @@
 package com.example.javajava.board.entity;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,4 +29,12 @@ public class Board {
   private String creatorId;
 
   private char deleteYn = 'N';
+
+  @OneToMany(mappedBy = "board")
+  private List<File> files = new ArrayList<>();
+
+  public void updateHitcnt() {
+    this.hitCnt++;
+    return;
+  }
 }

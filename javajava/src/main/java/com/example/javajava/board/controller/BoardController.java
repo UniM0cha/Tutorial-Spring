@@ -97,7 +97,7 @@ public class BoardController {
     @RequestMapping("/board/boardDetail")
     // model 은 컨트롤러에서 뷰로 넘겨줄 때 쓰는 것이므로 필요 없다.
     // BoardDto를 정의해놓으면 form을 통해서 받은 내용을 board에 자동으로 삽입하게 된다.
-    public String boardDetail(@RequestParam int boardIdx, Model model) {
+    public String boardDetail(@RequestParam Long boardIdx, Model model) {
 
         // 보드 인덱스를 통하여 보드 객체를 받아온다.
         BoardDto board = boardService.boardDetail(boardIdx);

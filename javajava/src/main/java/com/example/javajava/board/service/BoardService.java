@@ -12,7 +12,7 @@ public interface BoardService {
 
     void boardInsert(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest);
 
-    BoardDto boardDetail(int boardIdx);
+    BoardDto boardDetail(Long boardIdx);
 
     void boardUpdate(BoardDto board);
 
