@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
@@ -54,26 +55,33 @@ public class BoardServiceJpaImpl implements BoardService {
   }
 
   @Override
-  public void boardInsert(BoardDto boardDto, MultipartHttpServletRequest multipartHttpServletRequest) {
-    Board board = modelMapper.map(boardDto, Board.class);
-    log.info("저장할 board: " + board);
-    Board savedBoard = boardRepository.save(board);
-
-    // 1. 파일 저장
-    List<FileDto> fileDtos = fileUtils.parseFileInfo(savedBoard.getIdx(), multipartHttpServletRequest);
-
-    // 2. DB 저장
-    // list에 저장된 내용물이 있다면
-    if (!CollectionUtils.isEmpty(fileDtos)) {
-      List<File> files = fileDtos.stream()
-          .map((fileDto) -> modelMapper.map(fileDto, File.class))
-          .collect(Collectors.toList());
-
-      for (File file : files) {
-        log.info("저장할 files: " + file);
+  public void boardInsert(BoardDto boardDto, MultipartFile[] files) {
+    for (MultipartFile file : files) {
+      if (!file.isEmpty()) {
+        log.info("파일 정보: " + file.getOriginalFilename() + " / " + file.getContentType());
       }
-      fileRepository.saveAll(files);
     }
+    Board board = new Board();
+    board.boardDtoToBoard(boardDto);
+    Board savedBoard = boardRepository.save(board);
+    log.info("================> savedBoard: " + savedBoard.toString());
+
+    // // 1. 파일 저장
+    List<FileDto> fileDtos = fileUtils.parseFileInfo(savedBoard.getIdx(),
+        files);
+
+    // // 2. DB 저장
+    // // list에 저장된 내용물이 있다면
+    // if (!CollectionUtils.isEmpty(fileDtos)) {
+    // List<File> files = fileDtos.stream()
+    // .map((fileDto) -> modelMapper.map(fileDto, File.class))
+    // .collect(Collectors.toList());
+
+    // for (File file : files) {
+    // log.info("저장할 files: " + file);
+    // }
+    // fileRepository.saveAll(files);
+    // }
 
   }
 

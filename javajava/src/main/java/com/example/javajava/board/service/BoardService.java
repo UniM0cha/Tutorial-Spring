@@ -3,6 +3,7 @@ package com.example.javajava.board.service;
 import com.example.javajava.board.dto.BoardDto;
 import com.example.javajava.board.dto.FileDto;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public interface BoardService {
     List<BoardDto> boardList();
 
-    void boardInsert(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest);
+    void boardInsert(BoardDto board, MultipartFile[] files);
 
     BoardDto boardDetail(Long boardIdx);
 

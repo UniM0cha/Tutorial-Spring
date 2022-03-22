@@ -14,7 +14,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // 사용자 접근 경로 설정
     http.authorizeRequests()
         .antMatchers("/").permitAll()
-        .antMatchers("/user/**").hasAnyRole("MEMBER", "ADMIN")
+        // .antMatchers("/user/**").hasAnyRole("MEMBER", "ADMIN")
         .antMatchers("/board/**").hasRole("ADMIN");
 
     // CSRF : Cross Site Request Forgery : 사이트 간 위조 요청

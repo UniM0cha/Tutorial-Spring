@@ -2,6 +2,7 @@ package com.example.javajava.board.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import lombok.Getter;
 @Getter
 public class File {
   @Id
+  @Column(name = "file_idx")
   @GeneratedValue
   private Long idx;
 

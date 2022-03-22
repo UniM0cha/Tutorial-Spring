@@ -8,12 +8,19 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         '[format_sql]': true
         '[use_sql_comments]': false
         '[naming.physical-strategy]': org.hibernate.boot.model.naming.SpringPhysicalNamingStrategy
+
+  # 파일 처리
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+      location: ${user.dir}/files
 
   thymeleaf:
     cache: false
@@ -26,4 +33,4 @@ mybatis:
 logging:
   level:
     root: info
-    '[org.springframework.security]': debug
+    # '[org.springframework.security]': debug

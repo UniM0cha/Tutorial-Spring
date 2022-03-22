@@ -17,9 +17,9 @@ import java.util.List;
 @Component
 public class FileUtils {
 
-  public List<FileDto> parseFileInfo(Long boardIdx, MultipartHttpServletRequest multipartHttpServletRequest) {
+  public List<FileDto> parseFileInfo(Long boardIdx, MultipartFile[] files) {
 
-    if (ObjectUtils.isEmpty(multipartHttpServletRequest)) {
+    if (ObjectUtils.isEmpty(files)) {
       return null;
     }
 
@@ -36,11 +36,11 @@ public class FileUtils {
       file.mkdirs();
     }
 
-    Iterator<String> iter = multipartHttpServletRequest.getFileNames();
+    Iterator<String> iter = files.getFileNames();
 
     String originalFileExtention = null;
     while (iter.hasNext()) {
-      List<MultipartFile> list = multipartHttpServletRequest.getFiles(iter.next());
+      List<MultipartFile> list = files.getFiles(iter.next());
 
       for (MultipartFile multipartFile : list) {
 
