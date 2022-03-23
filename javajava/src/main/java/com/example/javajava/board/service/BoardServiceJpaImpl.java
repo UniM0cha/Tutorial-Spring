@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,7 @@ public class BoardServiceJpaImpl implements BoardService {
     Board savedBoard = boardRepository.save(board);
 
     // 1. 파일 저장
-    List<FileDto> fileDtos = fileUtils.parseFileInfo2(multiFiles);
+    List<FileDto> fileDtos = fileUtils.parseFileInfoAndSave(multiFiles);
 
     // 2. DB 저장
     for (FileDto fileDto : fileDtos) {

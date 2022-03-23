@@ -13,6 +13,8 @@ import javax.persistence.TemporalType;
 
 import com.example.javajava.board.dto.FileDto;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -28,9 +30,10 @@ public class File {
   private String originalFileName;
   private String storedFilePath;
   private Long fileSize;
-  private String creatorId;
+  private String creatorId = "test";
 
   @Temporal(TemporalType.TIMESTAMP)
+  @CreatedDate
   private Date createDatetime;
 
   private char deleteYn = 'N';
