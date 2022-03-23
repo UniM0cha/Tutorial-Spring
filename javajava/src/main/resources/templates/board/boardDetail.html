@@ -20,7 +20,7 @@
             <tbody>
             <tr>
                 <th scope="row">글 번호</th>
-                <td th:text="${board.boardIdx}"></td>
+                <td th:text="${board.idx}"></td>
                 <th scope="row">조회수</th>
                 <td th:text="${board.hitCnt}"></td>
             </tr>
@@ -43,7 +43,7 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
+        <input type="hidden" name="idx" th:value="${board.idx}">
     </form>
 
     <div class="file_list">

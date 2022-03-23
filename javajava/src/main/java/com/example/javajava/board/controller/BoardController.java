@@ -68,11 +68,7 @@ public class BoardController {
   public String boardList(Model model) {
     // 서비스에서 리스트를 받아온 다음
     List<BoardDto> list = boardService.boardList();
-    log.info("Access to boardList ==============> " + list.size());
-    for (BoardDto boardDto : list) {
-      log.info(boardDto.toString());
-    }
-    // System.out.println("list.size() = " + list.size());
+    log.info("보드 리스트 길이: " + list.size());
 
     // list라는 이름으로 받아온 list를 보내준다.
     model.addAttribute("list", list);
@@ -92,22 +88,22 @@ public class BoardController {
   // 파일 삽입한 것을 받아오기 위해 Multipart--- 어쩌구를 넣어준다.
   public String boardInsert(BoardDto boardDto, List<MultipartFile> files) {
     boardService.boardInsert(boardDto, files);
-    return "redirect:/";
+    return "redirect:/board/boardList";
   }
 
   @RequestMapping("/board/boardDetail")
   // model 은 컨트롤러에서 뷰로 넘겨줄 때 쓰는 것이므로 필요 없다.
   // BoardDto를 정의해놓으면 form을 통해서 받은 내용을 board에 자동으로 삽입하게 된다.
   public String boardDetail(@RequestParam Long boardIdx, Model model) {
+    log.info("boardIdx = " + boardIdx);
 
     // 보드 인덱스를 통하여 보드 객체를 받아온다.
     BoardDto board = boardService.boardDetail(boardIdx);
-    System.out.println("boardIdx = " + boardIdx);
-    System.out.println("board = " + board);
+    log.info("board = " + board);
 
     // 모델에 board란 속성에 board 객체 등록
     model.addAttribute("board", board);
-    return "/board/boardDetail";
+    return "/board/boardDetial";
   }
 
   @RequestMapping("/board/boardUpdate")
@@ -121,15 +117,15 @@ public class BoardController {
 
   @RequestMapping("/board/boardDelete")
   // @PathVariable 이란 것도 있다. 찾아보자
-  public String boardDelete(@RequestParam int boardIdx) {
+  public String boardDelete(@RequestParam Long boardIdx) {
     boardService.boardDelete(boardIdx);
     return "redirect:/board/boardList";
   }
 
   @RequestMapping("/board/downloadBoardFile")
   public void downloadBoardFile(
-      @RequestParam("idx") int idx,
-      @RequestParam("boardIdx") int boardIdx,
+      @RequestParam("idx") Long idx,
+      @RequestParam("boardIdx") Long boardIdx,
       HttpServletResponse response) throws IOException {
 
     FileDto boardFile = boardService.selectFileInfo(idx, boardIdx);

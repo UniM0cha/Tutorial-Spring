@@ -36,7 +36,7 @@ public class Board {
   @CreationTimestamp
   private Date createDatetime;
 
-  private String creatorId;
+  private String creatorId = "test";
 
   private char deleteYn = 'N';
 
@@ -49,7 +49,7 @@ public class Board {
   }
 
   public void boardDtoToBoard(BoardDto boardDto) {
-    this.idx = boardDto.getBoardIdx();
+    this.idx = boardDto.getIdx();
     this.title = boardDto.getTitle();
     this.contents = boardDto.getContents();
     this.hitCnt = boardDto.getHitCnt();

@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
   @GetMapping("/login/login")
   public String login() {
-    log.info("login 테스트중");
     return "login/login";
   }
 

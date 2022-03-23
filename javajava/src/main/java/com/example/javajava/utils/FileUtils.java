@@ -35,8 +35,6 @@ public class FileUtils {
     ZonedDateTime current = ZonedDateTime.now();
     String todayPath = current.format(format) + "/";
 
-    log.info("filePath: " + filePath);
-    log.info("todayPath: " + todayPath);
     File dir = new File(filePath + todayPath);
     // 경로가 없으면 디렉터리를 만든다.
     if (!dir.exists()) {
@@ -68,7 +66,6 @@ public class FileUtils {
             .storedFilePath(todayPath + newFileName)
             .build();
 
-        log.info("fileDto: " + fildDto.toString());
         fileDtos.add(fildDto);
 
         File fileSave = new File(filePath + todayPath + newFileName);

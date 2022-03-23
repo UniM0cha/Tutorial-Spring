@@ -16,7 +16,7 @@ public interface BoardService {
 
     void boardUpdate(BoardDto board);
 
-    void boardDelete(int boardIdx);
+    void boardDelete(Long boardIdx);
 
-    FileDto selectFileInfo(int idx, int boardIdx);
+    FileDto selectFileInfo(Long idx, Long boardIdx);
 }

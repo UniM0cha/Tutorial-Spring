@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 public class BoardServiceJpaImpl implements BoardService {
 
   private BoardRepository boardRepository;
-  private BoardMapper boardMapper;
   private FileRepository fileRepository;
   private FileUtils fileUtils;
   private ModelMapper modelMapper;
@@ -33,12 +31,10 @@ public class BoardServiceJpaImpl implements BoardService {
   @Autowired
   public BoardServiceJpaImpl(
       BoardRepository boardRepository,
-      BoardMapper boardMapper,
       FileRepository fileRepository,
       FileUtils fileUtils,
       ModelMapper modelMapper) {
     this.boardRepository = boardRepository;
-    this.boardMapper = boardMapper;
     this.fileRepository = fileRepository;
     this.fileUtils = fileUtils;
     this.modelMapper = modelMapper;
@@ -59,44 +55,54 @@ public class BoardServiceJpaImpl implements BoardService {
     Board board = new Board();
     board.boardDtoToBoard(boardDto);
     Board savedBoard = boardRepository.save(board);
+    log.info("데이터베이스 저장된 게시물 정보: " + savedBoard.toString());
 
     // 1. 파일 저장
     List<FileDto> fileDtos = fileUtils.parseFileInfoAndSave(multiFiles);
 
     // 2. DB 저장
     for (FileDto fileDto : fileDtos) {
-      File file = new File();
-      file.fileDtoToFile(fileDto);
+      File file = new File(fileDto);
       file.setBoard(savedBoard);
-      log.info("데이터베이스에 저장할 파일: " + file.toString());
-      fileRepository.save(file);
+      File savedFile = fileRepository.save(file);
+      log.info("데이터베이스 저장된 파일 정보: " + savedFile.toString());
     }
   }
 
   @Override
   public BoardDto boardDetail(Long boardIdx) {
     Board board = boardRepository.findById(boardIdx).get();
-    log.info("불러온 board: " + board);
+    log.info("불러온 board: " + board.toString());
 
     // 조회수 증가
-    board.updateHitcnt();
-    BoardDto boardDto = modelMapper.map(board, BoardDto.class);
-    return boardDto;
+    // board.updateHitcnt();
+    // BoardDto boardDto = modelMapper.map(board, BoardDto.class);
+    // return boardDto;
+    return new BoardDto();
   }
 
   @Override
-  public void boardUpdate(BoardDto board) {
-    boardMapper.boardUpdate(board);
+  public void boardUpdate(BoardDto boardDto) {
+    Board board = boardRepository.getById(boardDto.getIdx());
+    board.boardDtoToBoard(boardDto);
+    return;
+    // boardMapper.boardUpdate(board);
   }
 
   @Override
-  public void boardDelete(int boardIdx) {
-    boardMapper.boardDelete(boardIdx);
+  public void boardDelete(Long boardIdx) {
+    boardRepository.deleteById(boardIdx);
+    // boardMapper.boardDelete(boardIdx);
   }
 
   @Override
-  public FileDto selectFileInfo(int idx, int boardIdx) {
-    FileDto boardFile = boardMapper.selectFileInfo(idx, boardIdx);
-    return boardFile;
+  public FileDto selectFileInfo(Long idx, Long boardIdx) {
+    Board board = boardRepository.findById(boardIdx).get();
+    File file = fileRepository.findByIdxAndBoard(idx, board);
+
+    FileDto fileDto = new FileDto(file);
+
+    // FileDto boardFile = boardMapper.selectFileInfo(idx, boardIdx);
+    return fileDto;
   }
 }

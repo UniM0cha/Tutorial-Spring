@@ -16,6 +16,7 @@ import com.example.javajava.board.dto.FileDto;
 import org.springframework.data.annotation.CreatedDate;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
@@ -41,7 +42,7 @@ public class File {
   @ManyToOne(fetch = FetchType.LAZY)
   private Board board;
 
-  public void fileDtoToFile(FileDto fileDto) {
+  public File(FileDto fileDto) {
     this.originalFileName = fileDto.getOriginalFileName();
     this.storedFilePath = fileDto.getStoredFilePath();
     this.fileSize = fileDto.getFileSize();

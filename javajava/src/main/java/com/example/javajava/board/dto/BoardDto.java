@@ -1,15 +1,17 @@
 package com.example.javajava.board.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
 // DTO : Data Transfer Object : 데이터 전달 객체 (= DB 컬럼)
 @Data
+@NoArgsConstructor
 // @Getter @Setter @ToString
 public class BoardDto {
-    private Long boardIdx;
+    private Long idx;
     private String title;
     private String contents;
     private int hitCnt;

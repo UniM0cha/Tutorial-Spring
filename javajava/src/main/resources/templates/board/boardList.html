@@ -25,9 +25,9 @@
         </thead>
         <tbody>
             <tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
-                <td th:text="${vo.boardIdx}"></td>
+                <td th:text="${vo.idx}"></td>
                 <td class="title">
-                    <a th:href="@{boardDetail(boardIdx=${vo.boardIdx})}" th:text="${vo.title}"></a>
+                    <a th:href="@{boardDetail(boardIdx=${vo.idx})}" th:text="${vo.title}"></a>
                 </td>
                 <td th:text="${vo.hitCnt}"></td>
                 <td th:text="${vo.createDatetime}"></td>
