@@ -51,11 +51,9 @@ public class BoardServiceJpaImpl implements BoardService {
 
   @Override
   public void boardInsert(BoardDto boardDto, List<MultipartFile> multiFiles) {
-
     Board board = new Board();
     board.boardDtoToBoard(boardDto);
     Board savedBoard = boardRepository.save(board);
-    log.info("데이터베이스 저장된 게시물 정보: " + savedBoard.toString());
 
     // 1. 파일 저장
     List<FileDto> fileDtos = fileUtils.parseFileInfoAndSave(multiFiles);
@@ -65,26 +63,24 @@ public class BoardServiceJpaImpl implements BoardService {
       File file = new File(fileDto);
       file.setBoard(savedBoard);
       File savedFile = fileRepository.save(file);
-      log.info("데이터베이스 저장된 파일 정보: " + savedFile.toString());
     }
   }
 
   @Override
   public BoardDto boardDetail(Long boardIdx) {
     Board board = boardRepository.findById(boardIdx).get();
-    log.info("불러온 board: " + board.toString());
 
     // 조회수 증가
-    // board.updateHitcnt();
-    // BoardDto boardDto = modelMapper.map(board, BoardDto.class);
-    // return boardDto;
-    return new BoardDto();
+    board.updateHitcnt();
+    boardRepository.save(board);
+    return new BoardDto(board);
   }
 
   @Override
   public void boardUpdate(BoardDto boardDto) {
     Board board = boardRepository.getById(boardDto.getIdx());
     board.boardDtoToBoard(boardDto);
+    boardRepository.save(board);
     return;
     // boardMapper.boardUpdate(board);
   }
@@ -92,6 +88,8 @@ public class BoardServiceJpaImpl implements BoardService {
   @Override
   public void boardDelete(Long boardIdx) {
     boardRepository.deleteById(boardIdx);
+    // TODO : 파일 삭제 코드 추가
+    return;
     // boardMapper.boardDelete(boardIdx);
   }
 

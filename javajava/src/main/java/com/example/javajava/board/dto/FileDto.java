@@ -20,6 +20,7 @@ public class FileDto {
 
   public FileDto(File file) {
     this.idx = file.getIdx();
+    this.boardIdx = file.getBoard().getIdx();
     this.originalFileName = file.getOriginalFileName();
     this.storedFilePath = file.getStoredFilePath();
     this.fileSize = file.getFileSize();

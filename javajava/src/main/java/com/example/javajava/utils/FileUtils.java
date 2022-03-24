@@ -63,7 +63,7 @@ public class FileUtils {
         FileDto fildDto = FileDto.builder()
             .fileSize(file.getSize())
             .originalFileName(file.getOriginalFilename())
-            .storedFilePath(todayPath + newFileName)
+            .storedFilePath(filePath + todayPath + newFileName)
             .build();
 
         fileDtos.add(fildDto);
