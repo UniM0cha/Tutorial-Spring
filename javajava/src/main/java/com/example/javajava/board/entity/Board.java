@@ -19,12 +19,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Getter
 @ToString
-@Slf4j
 public class Board {
   @Id
   @Column(name = "board_idx")

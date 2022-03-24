@@ -4,7 +4,6 @@ import com.example.javajava.board.dto.BoardDto;
 import com.example.javajava.board.dto.FileDto;
 import com.example.javajava.board.entity.Board;
 import com.example.javajava.board.entity.File;
-import com.example.javajava.board.mapper.BoardMapper;
 import com.example.javajava.board.repository.BoardRepository;
 import com.example.javajava.board.repository.FileRepository;
 import com.example.javajava.utils.FileUtils;
@@ -14,13 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class BoardServiceJpaImpl implements BoardService {
 
   private BoardRepository boardRepository;
@@ -62,7 +58,7 @@ public class BoardServiceJpaImpl implements BoardService {
     for (FileDto fileDto : fileDtos) {
       File file = new File(fileDto);
       file.setBoard(savedBoard);
-      File savedFile = fileRepository.save(file);
+      fileRepository.save(file);
     }
   }
 

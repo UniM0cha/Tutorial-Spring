@@ -78,7 +78,6 @@
 
 // @Override
 // public BoardDto boardDetail(Long boardIdx) {
-// // TODO Auto-generated method stub
 // return null;
 // }
 
