@@ -1,2 +1,4 @@
 *.DS_Store
 javajava/files/**
+jpabook/ch11-jpa-shop/target/ch11-jpa-shop-1.0-SNAPSHOT.war
+jpabook/ch12-springdata-shop/target/ch12-springdata-shop-1.0-SNAPSHOT.war
