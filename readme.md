@@ -9,7 +9,6 @@ https://www.youtube.com/watch?v=VCOE3FYEm8I&list=PLUQt-s6e18eO2mko0SW1NOJX0F-rhU
 ### javajava
 김기태의 JAVA를 자바 - 스프링 강의 : Board를 JPA로 변환
 
----
 
 ## 김영한 강의
 
@@ -24,7 +23,7 @@ https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JP
 ### jpabook
 자바 ORM 표준 JPA 프로그래밍 교재
 
----
+
 
 ## 스프링 시큐리티
 
@@ -36,7 +35,7 @@ https://nahwasa.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-Spring-S
 https://bamdule.tistory.com/53  
 스프링 시큐리티 실습
 
----
+
 
 ## 웹 푸시
 
