@@ -6,6 +6,6 @@ import com.example.securityoauth2.entity.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MembeRepository extends JpaRepository<Member, Integer> {
+public interface MemberRepository extends JpaRepository<Member, Integer> {
   Optional<Member> findByAccount(String account);
 }

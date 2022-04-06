@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import com.example.securityoauth2.entity.Member;
 import com.example.securityoauth2.entity.MemberTO;
-import com.example.securityoauth2.repository.MembeRepository;
+import com.example.securityoauth2.repository.MemberRepository;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-  private MembeRepository memberRepository;
+  private MemberRepository memberRepository;
 
   @Override
   public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
