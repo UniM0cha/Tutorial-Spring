@@ -17,19 +17,28 @@ import lombok.Setter;
 @Setter
 public class OrderItem {
 
-  @Id
-  @GeneratedValue
-  @Column(name = "order_item_id")
-  private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "order_item_id")
+    private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "item_id")
-  private Item item;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id")
-  private Order order;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-  private int orderPrice;
-  private int count;
+    private int orderPrice;
+    private int count;
+
+    // 재고 수량을 원래 상태로 원복시켜준다.
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }
