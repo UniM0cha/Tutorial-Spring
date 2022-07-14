@@ -1,7 +1,5 @@
 package com.springboot.advanced_jpa.data.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "product")
@@ -20,7 +20,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class Product extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long number;
@@ -34,7 +36,7 @@ public class Product {
   @Column(nullable = false)
   private Integer stock;
 
-  private LocalDateTime createdAt;
+  // private LocalDateTime createdAt;
 
-  private LocalDateTime updatedAt;
+  // private LocalDateTime updatedAt;
 }

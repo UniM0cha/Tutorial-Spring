@@ -1,13 +1,13 @@
-package com.springboot.api;
+package com.springboot.relationship;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiApplication {
+public class RelationshipApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
+		SpringApplication.run(RelationshipApplication.class, args);
 	}
 
 }
