@@ -1,12 +1,12 @@
-package com.springboot.advanced_jpa.data.repository.support;
+package com.springboot.relationship.data.repository.support;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Component;
 
-import com.springboot.advanced_jpa.data.entity.Product;
-import com.springboot.advanced_jpa.data.entity.QProduct;
+import com.springboot.relationship.data.entity.Product;
+import com.springboot.relationship.data.entity.QProduct;
 
 @Component
 public class ProductRepositoryCustomImpl extends QuerydslRepositorySupport implements ProductRepositoryCustom {
