@@ -17,3 +17,5 @@ spring:
   output:
     ansi:
       enabled: always
+
+springboot.jwt.secret: solstice
