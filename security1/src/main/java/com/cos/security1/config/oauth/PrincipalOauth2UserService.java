@@ -28,6 +28,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
   // 구글로부터 받은 userRequest 데이터에 대한 후처리되는 함수
   // 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
   @Override
+  @SuppressWarnings("unchecked")
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
     // 구글 로그인 버튼 클릭 -> 구글 로그인 창 -> 로그인 완료 -> code 리턴(OAuth-Client라이브러리) ->
     // AccessToken 요청
@@ -47,7 +48,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
       oAuth2UserInfo = new NaverUserInfo(oAuth2User.getAttributes());
     } else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
       System.out.println("네이버 로그인 요청");
-      oAuth2UserInfo = new NaverUserInfo((Map) oAuth2User.getAttributes().get("response"));
+      // unchecked 경고 발생
+      oAuth2UserInfo = new NaverUserInfo((Map<String, Object>) oAuth2User.getAttributes().get("response"));
     } else {
       System.out.println("구글, 페이스북, 네이버만 지원함");
     }
